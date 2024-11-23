@@ -13,7 +13,7 @@ class ImagesController extends Controller
      */
     public function index()
     {
-        $images = Images::all();
+        $images = Images::paginate(10);
         return view('welcome', compact('images'));
     }
 
@@ -70,7 +70,7 @@ class ImagesController extends Controller
             'metadata' => $exifData ? json_encode($exifData) : null,
         ]);
         // Reindirizza l'utente con un messaggio di successo
-        return view('welcome')->with('success', 'Immagine caricata con successo.');
+        return redirect('/')->with('success', 'Immagine caricata con successo.');
     }
 
     // Funzioni helper per convertire le coordinate GPS

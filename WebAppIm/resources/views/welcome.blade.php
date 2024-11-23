@@ -23,6 +23,7 @@
             height: 100%;
             object-fit: cover; /* L'immagine riempie il contenitore mantenendo le proporzioni e tagliando se necessario */
         }
+
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -258,25 +259,25 @@
                         </div>
                     </div>
                 </div>
-
-                </p>
             </div>
         </div>
     </section>
 
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                @if ($images ?? '')
+            @if ($images ?? '')
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     @foreach ($images as $image)
                         <div class="col">
                             <div class="card shadow-sm">
                                 <div class="image-container">
-                                    <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top" alt="...">
+                                    <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top"
+                                         alt="...">
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $image->title }}</h5>
-                                    <p class="card-text">Data di Caricamento: {{ $image->uploaded_at->format('d/m/Y H:i') }}</p>
+                                    <p class="card-text">Data di
+                                        Caricamento: {{ $image->uploaded_at->format('d/m/Y H:i') }}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -288,8 +289,12 @@
                             </div>
                         </div>
                     @endforeach
-                @endif
-            </div>
+
+                </div>
+            @endif
+        </div>
+        <div class="d-flex justify-content-center">
+            {{ $images->links() }}
         </div>
     </div>
 
