@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Images;
 use Illuminate\Http\Request;
-use Nette\Utils\Image;
 
 class ImagesController extends Controller
 {
@@ -18,12 +17,52 @@ class ImagesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      */
-    public function create()
+    public function indexByTitle()
     {
-        //
+        $images = Images::orderBy('title', 'desc')->paginate(10);
+        return view('welcome', compact('images'));
     }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function indexByUploadedAt()
+    {
+        $images = Images::orderBy('uploaded_at', 'desc')->paginate(10);
+        return view('welcome', compact('images'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function indexByTitleIncr()
+    {
+        $images = Images::orderBy('title', 'asc')->paginate(10);
+        return view('welcome', compact('images'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function indexByUploadedAtIncr()
+    {
+        $images = Images::orderBy('uploaded_at', 'asc')->paginate(10);
+        return view('welcome', compact('images'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function search(Request $request)
+    {
+        $filter = $request->input('filter');
+        $images = Images::where('title', 'like', '%' . $filter . '%')->paginate(10);
+        return view('welcome', compact('images'));
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -101,35 +140,4 @@ class ImagesController extends Controller
     }
 
 
-        /**
-     * Display the specified resource.
-     */
-    public function show(Images $images)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Images $images)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Images $images)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Images $images)
-    {
-        //
-    }
 }

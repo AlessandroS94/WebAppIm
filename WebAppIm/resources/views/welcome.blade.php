@@ -208,7 +208,6 @@
 </header>
 
 <main>
-
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
@@ -265,39 +264,127 @@
 
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
-            @if ($images ?? '')
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    @foreach ($images as $image)
-                        <div class="col">
-                            <div class="card shadow-sm">
-                                <div class="image-container">
-                                    <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top"
-                                         alt="...">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $image->title }}</h5>
-                                    <p class="card-text">Data di
-                                        Caricamento: {{ $image->uploaded_at->format('d/m/Y H:i') }}</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+            <ul class="nav " id="imagesTab">
+                <li class="nav-item">
+                    <button class="nav-link active" id="grid-tab" data-bs-toggle="tab" data-bs-target="#grid"
+                            type="button" role="tab" aria-controls="grid" aria-selected="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-grid-3x2-gap" viewBox="0 0 16 16">
+                            <path
+                                d="M4 4v2H2V4zm1 7V9a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m5 5V9a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V4a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1M9 4v2H7V4zm5 0h-2v2h2zM4 9v2H2V9zm5 0v2H7V9zm5 0v2h-2V9zm-3-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm1 4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1z"/>
+                        </svg>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="list-tab" data-bs-toggle="tab" data-bs-target="#list" type="button"
+                            role="tab" aria-controls="list" aria-selected="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-list-ul" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                        </svg>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-binoculars-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M4.5 1A1.5 1.5 0 0 0 3 2.5V3h4v-.5A1.5 1.5 0 0 0 5.5 1zM7 4v1h2V4h4v.882a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V13H9v-1.5a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5V13H1V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V4zM1 14v.5A1.5 1.5 0 0 0 2.5 16h3A1.5 1.5 0 0 0 7 14.5V14zm8 0v.5a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5V14zm4-11H9v-.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5z"/>
+                        </svg>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <form>
+                        <select class="form-select" aria-label="Default select example" onchange="redirectToCategory(this.value)">
+                            <option selected>Ordina per:</option>
+                            <option value="{{route('indexByTitleDecr')}}">Titolo Descrescente</option>
+                            <option value="{{route('indexByTitleIncr')}}">Titolo Crescente</option>
+                            <option value="{{route('indexByUploadedAtDecr')}}">Data caricamento Descrescente</option>
+                            <option value="{{route('indexByUploadedAtIncr')}}">Data caricamento Crescente</option>
+                            <option value="/">Casuale</option>
+                        </select>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <div class="container-fluid">
+                        <form action="{{route('indexSearch')}}" method="POST" class="d-flex" role="search">
+                            @csrf
+                            <input name="filter" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+            <div class="tab-content mt-3">
+                <div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
+                    @if ($images ?? '')
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                            @foreach ($images as $image)
+                                <div class="col">
+                                    <div class="card shadow-sm">
+                                        <div class="image-container">
+                                            <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top"
+                                                 alt="...">
                                         </div>
-                                        <small class="text-body-secondary">9 mins</small>
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $image->title }}</h5>
+                                            <p class="card-text">Data di
+                                                Caricamento: {{ $image->uploaded_at->format('d/m/Y H:i') }}</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                                        View
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                                        Edit
+                                                    </button>
+                                                </div>
+                                                <small class="text-body-secondary">9 mins</small>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    @endforeach
+                            @endforeach
 
+                        </div>
+                    @endif
                 </div>
-            @endif
-        </div>
-        <div class="d-flex justify-content-center">
-            {{ $images->links() }}
+                <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Titolo</th>
+                            <th scope="col">Caricamento</th>
+                            <th scope="col">Image</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if ($images ?? '')
+                            @foreach ($images as $image)
+                                <tr>
+                                    <th scope="row">{{ $image->id }}</th>
+                                    <td>{{ $image->title }}</td>
+                                    <td>{{ $image->uploaded_at->format('d/m/Y H:i') }}</td>
+                                    <td>
+                                        <div class="image-container">
+                                            <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top"
+                                                 alt="...">
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                {{ $images->links() }}
+            </div>
         </div>
     </div>
-
 </main>
 
 <footer class="text-body-secondary py-5">
@@ -309,6 +396,6 @@
     </div>
 </footer>
 <script src="{{asset('assets/dist/js/bootstrap.bundle.min.js')}}"></script>
-
+<script src="{{asset('assets/js/toolbar.js')}}"></script>
 </body>
 </html>
