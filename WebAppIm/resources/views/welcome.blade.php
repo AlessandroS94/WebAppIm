@@ -286,7 +286,7 @@
                     </button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link" onclick="">
+                    <button class="nav-link" onclick="clearHidden()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-binoculars-fill" viewBox="0 0 16 16">
                             <path
@@ -296,7 +296,8 @@
                 </li>
                 <li class="nav-item">
                     <form>
-                        <select class="form-select" aria-label="Default select example" onchange="redirectToCategory(this.value)">
+                        <select class="form-select" aria-label="Default select example"
+                                onchange="redirectToCategory(this.value)">
                             <option selected>Ordina per:</option>
                             <option value="{{route('indexByTitleDecr')}}">Titolo Descrescente</option>
                             <option value="{{route('indexByTitleIncr')}}">Titolo Crescente</option>
@@ -310,7 +311,8 @@
                     <div class="container-fluid">
                         <form action="{{route('indexSearch')}}" method="POST" class="d-flex" role="search">
                             @csrf
-                            <input name="filter" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
+                            <input name="filter" class="form-control me-2" type="text" placeholder="Search"
+                                   aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
                     </div>
@@ -319,9 +321,9 @@
             <div class="tab-content mt-3">
                 <div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
                     @if ($images ?? '')
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <div id="elements" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                             @foreach ($images as $image)
-                                <div class="col">
+                                <div class="col" id="Element_ID_{{$image->id}}">
                                     <div class="card shadow-sm">
                                         <div class="image-container">
                                             <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top"
@@ -333,20 +335,17 @@
                                                 Caricamento: {{ $image->uploaded_at->format('d/m/Y H:i') }}</p>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary">
-                                                        View
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary">
-                                                        Edit
+                                                    <button type="button"
+                                                            onclick="toggleCardVisibility('Element_ID_{{$image->id}}')"
+                                                            class="btn btn-sm btn-outline-secondary">
+                                                        Rimuovi dalla vista
                                                     </button>
                                                 </div>
-                                                <small class="text-body-secondary">9 mins</small>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-
                         </div>
                     @endif
                 </div>
@@ -358,12 +357,13 @@
                             <th scope="col">Titolo</th>
                             <th scope="col">Caricamento</th>
                             <th scope="col">Image</th>
+                            <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @if ($images ?? '')
                             @foreach ($images as $image)
-                                <tr>
+                                <tr id="Element_ID_{{$image->id}}">
                                     <th scope="row">{{ $image->id }}</th>
                                     <td>{{ $image->title }}</td>
                                     <td>{{ $image->uploaded_at->format('d/m/Y H:i') }}</td>
@@ -373,6 +373,14 @@
                                                  alt="...">
                                         </div>
                                     </td>
+                                    <td>
+                                        <button type="button"
+                                                onclick="toggleCardVisibility('Element_ID_{{$image->id}}')"
+                                                class="btn btn-sm btn-outline-secondary">
+                                            Rimuovi dalla vista
+                                        </button>
+                                    </td>
+
                                 </tr>
                             @endforeach
                         @endif
