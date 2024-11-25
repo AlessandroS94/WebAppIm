@@ -8,18 +8,17 @@ function toggleCardVisibility(elementId) {
     const element = document.getElementById(elementId);
     if (element) {
         document.getElementById(elementId).remove();
-        sessionStorage.setItem(sessionStorage.length, elementId);
+        localStorage.setItem(localStorage.length, elementId);
     }
 }
 
 function clearHidden(){
-    sessionStorage.clear()
+    localStorage.clear()
     window.location.reload();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    elements = sessionStorage
-    for (let i = 0; i < elements.length; i++) {
-        toggleCardVisibility(elements[i]);
+    for (let i = 0; i < localStorage.length; i++) {
+        toggleCardVisibility(localStorage[i]);
     }
 });

@@ -237,10 +237,19 @@
                             <form action="{{ route('images.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-body">
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                     <!-- Campo per il titolo dell'immagine -->
                                     <div class="mb-3">
                                         <label for="title">Titolo</label>
-                                        <input type="text" name="title" class="form-control" value="{{ old('title') }}"
+                                        <input type="text" name="title" class="form-control" value="Titolo"
                                                placeholder="Inserisci il titolo" required>
                                     </div>
                                     <div class="mb-3">
@@ -388,6 +397,7 @@
                     </table>
                 </div>
             </div>
+            <br>
             <div class="d-flex justify-content-center">
                 {{ $images->links() }}
             </div>
@@ -400,7 +410,7 @@
         <p class="float-end mb-1">
             <a href="#">Back to top</a>
         </p>
-        <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+        <p class="mb-1">Photo example is &copy; Bootstrap</p>
     </div>
 </footer>
 <script src="{{asset('assets/dist/js/bootstrap.bundle.min.js')}}"></script>

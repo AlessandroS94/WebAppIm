@@ -79,12 +79,13 @@ class ImagesController extends Controller
         $imagePath = $imageFile->store('images', 'public');
 
         // Estrazione dei metadati (opzionale, se implementato)
-        $exifData = @exif_read_data($imageFile);
+        $exifData = exif_read_data($imageFile);
 
         // Inizializzazione delle variabili per i metadati
         $dateTaken = null;
         $latitude = null;
         $longitude = null;
+
 
         if ($exifData !== false) {
             // Estrai la data dello scatto
