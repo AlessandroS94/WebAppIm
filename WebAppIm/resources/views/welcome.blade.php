@@ -7,7 +7,7 @@
     <meta name="description" content="Images Toolbar">
     <meta name="author" content="Alessandro Sallese">
     <meta name="generator" content="Alessandro">
-    <title>Image toolbar</title>
+    <title>Photo toolbar</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="{{ asset('assets/dist/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -342,6 +342,11 @@
                                             <h5 class="card-title">{{ $image->title }}</h5>
                                             <p class="card-text">Data di
                                                 Caricamento: {{ $image->uploaded_at->format('d/m/Y H:i') }}</p>
+                                            @if($image->latitude ??'')
+                                                <p>Latitude: {{ $image->latitude}}</p>
+                                                <p>Longitude: {{ $image->longitude}}</p>
+
+                                            @endif
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="btn-group">
                                                     <button type="button"
@@ -375,7 +380,7 @@
                                 <tr id="Element_ID_{{$image->id}}">
                                     <th scope="row">{{ $image->id }}</th>
                                     <td>{{ $image->title }}</td>
-                                    <td>{{ $image->uploaded_at->format('d/m/Y H:i') }}</td>
+                                    <td>Data: {{ $image->uploaded_at->format('d/m/Y H:i') }} </td>
                                     <td>
                                         <div class="image-container">
                                             <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top"
