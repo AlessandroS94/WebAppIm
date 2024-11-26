@@ -303,6 +303,7 @@
                         </svg>
                     </button>
                 </li>
+
                 <li class="nav-item">
                     <form>
                         <select class="form-select" aria-label="Default select example"
@@ -332,7 +333,7 @@
                     @if ($images ?? '')
                         <div id="elements" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                             @foreach ($images as $image)
-                                <div class="col" id="Element_ID_{{$image->id}}">
+                                <div class="col" id ="Element_ID_{{$image->id}}">
                                     <div class="card shadow-sm">
                                         <div class="image-container">
                                             <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top"
@@ -352,7 +353,7 @@
                                                     <button type="button"
                                                             onclick="toggleCardVisibility('Element_ID_{{$image->id}}')"
                                                             class="btn btn-sm btn-outline-secondary">
-                                                        Rimuovi dalla vista
+                                                        Rimuovi/Riammetti dalla vista
                                                     </button>
                                                 </div>
                                             </div>
@@ -374,10 +375,10 @@
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="elements_t">
                         @if ($images ?? '')
                             @foreach ($images as $image)
-                                <tr id="Element_ID_{{$image->id}}">
+                                <tr id="Element_ID_{{$image->id}}_T">
                                     <th scope="row">{{ $image->id }}</th>
                                     <td>{{ $image->title }}</td>
                                     <td>Data: {{ $image->uploaded_at->format('d/m/Y H:i') }} </td>
@@ -387,14 +388,13 @@
                                                  alt="...">
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class=".action-cell">
                                         <button type="button"
                                                 onclick="toggleCardVisibility('Element_ID_{{$image->id}}')"
                                                 class="btn btn-sm btn-outline-secondary">
                                             Rimuovi dalla vista
                                         </button>
                                     </td>
-
                                 </tr>
                             @endforeach
                         @endif
